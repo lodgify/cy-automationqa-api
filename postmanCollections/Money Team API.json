@@ -1,0 +1,2522 @@
+{
+	"info": {
+		"_postman_id": "98f1d517-8d91-48b3-b15f-aa78d107597d",
+		"name": "Money Team API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19250626"
+	},
+	"item": [
+		{
+			"name": "Login to Lodgify",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rememberLogin\": true,\n    \"login\": \"{{loginId}}\",\n    \"password\": \"{{loginPassword}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://identityserver.lodgify{{env}}.com/account/login",
+							"protocol": "https",
+							"host": [
+								"identityserver",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/account",
+			"item": [
+				{
+					"name": "/accountContact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code == 200 ) {\r",
+									"\r",
+									"    pm.test(\"Verify if correct response body type\", () => {\r",
+									"        pm.response.to.be.json;\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Verify response values\", () => {\t\r",
+									"        let jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData.success).to.be.eql(true);\r",
+									"    });\r",
+									"\r",
+									"\tconst schema = {\r",
+									"\t\t\"type\": \"object\",\r",
+									"\t\t\"properties\": {\r",
+									"\t\t\t\"data\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                    \"firstName\": {\"type\": \"string\"},\r",
+									"                    \"lastName\": {\"type\": \"string\"},\r",
+									"                    \"preferenceCulture\": {\"type\": \"string\"},\r",
+									"                    \"primaryPhonePrefix\": {\"type\": \"string\"},\r",
+									"                    \"primaryPhoneNumber\": {\"type\": \"string\"},\r",
+									"                    \"showPrimaryPhone\": {\"type\": \"boolean\"},\r",
+									"                    \"additionalPhonePrefix\": {\"type\": [\"string\", \"null\"]},\r",
+									"                    \"additionalPhoneNumber\": {\"type\": [\"string\", \"null\"]},\r",
+									"                    \"spokenLanguages\": {\"type\": \"string\"},\r",
+									"                    \"website\": {\"type\": [\"string\", \"null\"]},\r",
+									"                    \"description\": {\"type\": \"string\"},\r",
+									"                    \"facebookAppId\": {\"type\": \"string\"},\r",
+									"                    \"facebookPageId\": {\"type\": [\"string\", \"null\"]},\r",
+									"                },\r",
+									"\t\t        \"required\":[\"firstName\",\"lastName\",\"preferenceCulture\",\"primaryPhonePrefix\",\"primaryPhoneNumber\",\"showPrimaryPhone\",\"additionalPhonePrefix\",\"additionalPhoneNumber\",\"spokenLanguages\",\"website\",\"description\",\"facebookAppId\",\"facebookPageId\"],\r",
+									"                \"additionalProperties\": false\r",
+									"            },\r",
+									"            \"success\": {\"type\": \"boolean\"},\r",
+									"            \"warnings\": {\"type\": \"array\"}\r",
+									"\t\t},\r",
+									"        \"required\": [\"success\"],\r",
+									"        \"additionalProperties\": false\r",
+									"\t}    \r",
+									"\t\r",
+									"\tpm.test(\"Validate if correct response schema\", ()=> {\r",
+									"\t    pm.response.to.have.jsonSchema(schema);\r",
+									"\t    console.log(\"Response schema validation complete\")\r",
+									"\t});\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://app.lodgify{{env}}.com/api/account/accountContact",
+							"protocol": "https",
+							"host": [
+								"app",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"account",
+								"accountContact"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/{propertyOwnerId}",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://account.lodgify{{env}}.com/api/v2/account/466151",
+							"protocol": "https",
+							"host": [
+								"account",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"v2",
+								"account",
+								"466151"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/availableFeatures",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code == 200 ) {\t\r",
+									"\r",
+									"    pm.test(\"Verify if correct response body type\", () => {\r",
+									"        pm.response.to.be.json;\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Verify response values\", () => {\t\r",
+									"        let jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData.success).to.be.eql(true);\r",
+									"        pm.expect(jsonData.statusCode).to.be.eql(\"OK\");\r",
+									"    });\r",
+									"\r",
+									"\tconst schema = {\r",
+									"\t\t\"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"succes\": {\"type\": \"boolean\"},\r",
+									"            \"statusCode\": {\"type\": \"string\"},\r",
+									"            \"data\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                    \"features\": {\r",
+									"                        \"type\": \"array\",\r",
+									"                        \"items\": {\"type\": \"string\"}\r",
+									"                    }\r",
+									"                },\r",
+									"                \"additionalProperties\": false\r",
+									"            },\r",
+									"\t    },\r",
+									"        \"required\": [\"success\", \"statusCode\", \"data\"]\r",
+									"    }\r",
+									"\r",
+									"\tpm.test(\"Validate if correct response schema\", ()=> {\r",
+									"\t    pm.response.to.have.jsonSchema(schema);\r",
+									"\t    console.log(\"Response schema validation complete\")\r",
+									"\t});\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://account.lodgify{{env}}.com/api/v2/account/toggling/availableFeatures",
+							"protocol": "https",
+							"host": [
+								"account",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"v2",
+								"account",
+								"toggling",
+								"availableFeatures"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/existingFeatures",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code == 200 ) {\t\t\r",
+									"\r",
+									"    pm.test(\"Verify if correct response body type\", () => {\r",
+									"        pm.response.to.be.json;\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Verify response values\", () => {\t\r",
+									"        let jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData.success).to.be.eql(true);\r",
+									"        pm.expect(jsonData.statusCode).to.be.eql(\"OK\");\r",
+									"    });\r",
+									"\r",
+									"\tconst schema = {\r",
+									"\t\t\"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"succes\": {\"type\": \"boolean\"},\r",
+									"            \"statusCode\": {\"type\": \"string\"},\r",
+									"            \"data\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                    \"features\": {\r",
+									"                        \"type\": \"array\",\r",
+									"                        \"items\": {\r",
+									"                            \"type\": \"object\",\r",
+									"                            \"properties\": {\r",
+									"                                \"name\": {\"type\": \"string\"}\r",
+									"                            }\r",
+									"                        }                        \r",
+									"                    }\r",
+									"                },\r",
+									"                \"additionalProperties\": false\r",
+									"            },\r",
+									"\t    },\r",
+									"        \"required\": [\"success\", \"statusCode\", \"data\"]\r",
+									"    }  \r",
+									"\t\r",
+									"\tpm.test(\"Validate if correct response schema\", ()=> {\r",
+									"\t    pm.response.to.have.jsonSchema(schema);\r",
+									"\t    console.log(\"Response schema validation complete\")\r",
+									"\t});\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://account.lodgify{{env}}.com/api/v2/account/toggling/existingFeatures",
+							"protocol": "https",
+							"host": [
+								"account",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"v2",
+								"account",
+								"toggling",
+								"existingFeatures"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/notifications",
+			"item": [
+				{
+					"name": "/features",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://notifications.lodgify{{env}}.com/api/v1/features",
+							"protocol": "https",
+							"host": [
+								"notifications",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"features"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/reservations/customNotifications",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if correct response body type\", () => {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify response values\", () => {\t\r",
+									"    let jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.key).to.contain(\"ScheduledNotification\");\r",
+									"    pm.collectionVariables.set(\"customNotificationKey\", jsonData.key);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code == 201 ) {\t\t\r",
+									"\tconst schema = {\r",
+									"\t\t\"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"key\": {\"type\": \"string\"}\r",
+									"        },\r",
+									"        \"required\": [\"key\"]\r",
+									"    }  \r",
+									"\t\r",
+									"\tpm.test(\"Validate if correct response schema\", ()=> {\r",
+									"\t    pm.response.to.have.jsonSchema(schema);\r",
+									"\t});\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let title = pm.variables.replaceIn('{{$randomCity}}');\r",
+									"\r",
+									"pm.collectionVariables.set('customNotificationTitle', title);\r",
+									"pm.collectionVariables.set('rentalName', _.random(1000, 9999));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"title\": \"{{customNotificationTitle}}\",\r\n\"recipientTypes\": [\"Guest\"],\r\n\"sourceTypes\": [\"Lodgify\"],\r\n\"schedule\": {\r\n\t\t\"eventType\": \"AfterArrival\",\r\n\t\t\"timeSpan\": \"02.00:00:00\"\r\n\t}, \r\n\"messages\": [\r\n    {\r\n        \"culture\": \"fr\",\r\n        \"title\": \"After arrival 2 days {{rentalName}} was declined\",\r\n        \"body\": \"<html>Siema</html>\",\r\n        \"attachments\": []\r\n    }\r\n]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://notifications.lodgify{{env}}.com/api/v1/reservations/customNotifications",
+							"protocol": "https",
+							"host": [
+								"notifications",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reservations",
+								"customNotifications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/reservations/customNotifications",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if correct response body type\", () => {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify response values\", () => {\t\r",
+									"    let jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.notifications[0].key).to.be.eql(pm.collectionVariables.get(\"customNotificationKey\"));\r",
+									"    pm.expect(jsonData.notifications[0].title).to.be.eql(pm.collectionVariables.get(\"customNotificationTitle\"));\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code == 201 ) {\t\t\r",
+									"\tconst schema = {\r",
+									"\t\t\"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"key\": {\"type\": \"string\"}\r",
+									"        },\r",
+									"        \"required\": [\"key\"]\r",
+									"    }  \r",
+									"\t\r",
+									"\tpm.test(\"Validate if correct response schema\", ()=> {\r",
+									"\t    pm.response.to.have.jsonSchema(schema);\r",
+									"\t    console.log(\"Response schema validation complete\")\r",
+									"\t});\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://notifications.lodgify{{env}}.com/api/v1/reservations/customNotifications",
+							"protocol": "https",
+							"host": [
+								"notifications",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reservations",
+								"customNotifications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/reservations/customeNotifications",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://notifications.lodgify{{env}}.com/api/v1/reservations/customNotifications/{{customNotificationKey}}",
+							"protocol": "https",
+							"host": [
+								"notifications",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reservations",
+								"customNotifications",
+								"{{customNotificationKey}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/availability",
+			"item": [
+				{
+					"name": "/calendar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code == 200 ) {\t\r",
+									"\r",
+									"    pm.test(\"Verify if correct response body type\", () => {\r",
+									"        pm.response.to.be.json;\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Verify response values\", () => {\t\r",
+									"        let jsonData = pm.response.json();\r",
+									"        pm.collectionVariables.set(\"propertyId\", jsonData.data[0].propertyId);\r",
+									"    });\t\r",
+									"    \r",
+									"\tconst schema = {\r",
+									"\t\t\"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"data\": {\r",
+									"                \"type\": \"array\",\r",
+									"                \"items\": {\r",
+									"                    \"type\": \"object\",\r",
+									"                    \"properties\": {\r",
+									"                        \"propertyId\": {\"type\": \"number\"},\r",
+									"                        \"propertyName\": {\"type\": \"string\"},\r",
+									"                        \"roomTypes\": {\r",
+									"                            \"type\": \"array\",\r",
+									"                            \"items\": {\r",
+									"                                \"type\": \"object\",\r",
+									"                                \"properties\": {\r",
+									"                                    \"roomTypeId\": {\"type\": \"number\"},\r",
+									"                                    \"roomTypeName\": {\"type\": \"string\"},\r",
+									"                                    \"totalUnits\": {\"type\": \"number\"},\r",
+									"                                    \"totalDisplayUnits\": {\"type\": \"number\"},\r",
+									"                                    \"periods\": {\r",
+									"                                        \"type\": \"array\",\r",
+									"                                        \"items\": {\r",
+									"                                            \"type\": \"object\",\r",
+									"                                            \"properties\": {\r",
+									"                                                \"start\": {\r",
+									"                                                    \"type\": \"string\",\r",
+									"                                                    \"format\": \"date\"\r",
+									"                                                },\r",
+									"                                                \"end\": {\r",
+									"                                                    \"type\": \"string\",\r",
+									"                                                    \"format\": \"date\"\r",
+									"                                                },\r",
+									"                                                \"available\": {\"type\": \"number\"},\r",
+									"                                                \"allowedActions\": {\r",
+									"                                                    \"type\": \"array\",\r",
+									"                                                    \"items\": {\"type\": \"string\"}\r",
+									"                                                },\r",
+									"                                            }\r",
+									"                                        }\r",
+									"                                    },\r",
+									"                                }\r",
+									"                            }\r",
+									"                        },\r",
+									"                    }\r",
+									"                }\r",
+									"            },           \r",
+									"            \"success\": {\"type\": \"boolean\"},\r",
+									"            \"array\": {\"type\": \"array\"},\r",
+									"        }\r",
+									"    }  \r",
+									"\t\r",
+									"\tpm.test(\"Validate if correct response schema\", ()=> {\r",
+									"\t    pm.response.to.have.jsonSchema(schema);\r",
+									"\t});\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://app.lodgify{{env}}.com/api/availability/calendar/?periodStart=2022-03-11&periodEnd=2022-06-11",
+							"protocol": "https",
+							"host": [
+								"app",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"availability",
+								"calendar",
+								""
+							],
+							"query": [
+								{
+									"key": "periodStart",
+									"value": "2022-03-11"
+								},
+								{
+									"key": "periodEnd",
+									"value": "2022-06-11"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/features",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://app.lodgify{{env}}.com/api/availability/features",
+							"protocol": "https",
+							"host": [
+								"app",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"availability",
+								"features"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/calendar/{propertyId}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code == 200 ) {\t\r",
+									"\r",
+									"    pm.test(\"Verify if correct response body type\", () => {\r",
+									"        pm.response.to.be.json;\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Verify response values\", () => {\t\r",
+									"        let jsonData = pm.response.json();\r",
+									"        pm.collectionVariables.set(\"roomTypeId\", jsonData.data.roomTypes[0].roomTypeId);\r",
+									"    });\t\t\r",
+									"    \r",
+									"\tconst schema = {\r",
+									"\t\t\"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"data\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                    \"propertyId\": {\"type\": \"number\"},\r",
+									"                    \"propertyName\": {\"type\": \"string\"},\r",
+									"                    \"roomTypes\": {\r",
+									"                        \"type\": \"array\",\r",
+									"                        \"items\": {\r",
+									"                            \"type\": \"object\",\r",
+									"                            \"properties\": {\r",
+									"                                \"roomTypeId\": {\"type\": \"number\"},\r",
+									"                                \"roomTypeName\": {\"type\": \"string\"},\r",
+									"                                \"totalUnits\": {\"type\": \"number\"},\r",
+									"                                \"totalDisplayUnits\": {\"type\": \"number\"},\r",
+									"                                \"periods\": {\r",
+									"                                    \"type\": \"array\",\r",
+									"                                    \"items\": {\r",
+									"                                        \"type\": \"object\",\r",
+									"                                        \"properties\": {\r",
+									"                                            \"start\": {\r",
+									"                                                \"type\": \"string\",\r",
+									"                                                \"format\": \"date\"\r",
+									"                                            },\r",
+									"                                            \"end\": {\r",
+									"                                                \"type\": \"string\",\r",
+									"                                                \"format\": \"date\"\r",
+									"                                            },\r",
+									"                                            \"available\": {\"type\": \"number\"},\r",
+									"                                            \"allowedActions\": {\r",
+									"                                                \"type\": \"array\",\r",
+									"                                                \"items\": {\"type\": \"string\"}\r",
+									"                                            },\r",
+									"                                        }\r",
+									"                                    }\r",
+									"                                },\r",
+									"                            }\r",
+									"                        }\r",
+									"                    },\r",
+									"                }\r",
+									"            },           \r",
+									"            \"success\": {\"type\": \"boolean\"},\r",
+									"            \"array\": {\"type\": \"array\"},\r",
+									"        }\r",
+									"    }  \r",
+									"\t\r",
+									"\tpm.test(\"Validate if correct response schema\", ()=> {\r",
+									"\t    pm.response.to.have.jsonSchema(schema);\r",
+									"\t});\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://app.lodgify{{env}}.com/api/availability/calendar/{{propertyId}}/?periodStart=2022-03-11&periodEnd=2022-06-11",
+							"protocol": "https",
+							"host": [
+								"app",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"availability",
+								"calendar",
+								"{{propertyId}}",
+								""
+							],
+							"query": [
+								{
+									"key": "periodStart",
+									"value": "2022-03-11"
+								},
+								{
+									"key": "periodEnd",
+									"value": "2022-06-11"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/calendar/{propertyId}/{roomTypeId}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code == 200 ) {\t\t\t\r",
+									"\r",
+									"    pm.test(\"Verify if correct response body type\", () => {\r",
+									"        pm.response.to.be.json;\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"Verify response values\", () => {\t\r",
+									"        let jsonData = pm.response.json();\r",
+									"        pm.collectionVariables.set(\"roomTypeId\", jsonData.data.roomTypes[0].roomTypeId);\r",
+									"    });\r",
+									"\r",
+									"\tconst schema = {\r",
+									"\t\t\"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"data\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                    \"propertyId\": {\"type\": \"number\"},\r",
+									"                    \"propertyName\": {\"type\": \"string\"},\r",
+									"                    \"roomTypes\": {\r",
+									"                        \"type\": \"array\",\r",
+									"                        \"items\": {\r",
+									"                            \"type\": \"object\",\r",
+									"                            \"properties\": {\r",
+									"                                \"roomTypeId\": {\"type\": \"number\"},\r",
+									"                                \"roomTypeName\": {\"type\": \"string\"},\r",
+									"                                \"totalUnits\": {\"type\": \"number\"},\r",
+									"                                \"totalDisplayUnits\": {\"type\": \"number\"},\r",
+									"                                \"periods\": {\r",
+									"                                    \"type\": \"array\",\r",
+									"                                    \"items\": {\r",
+									"                                        \"type\": \"object\",\r",
+									"                                        \"properties\": {\r",
+									"                                            \"start\": {\r",
+									"                                                \"type\": \"string\",\r",
+									"                                                \"format\": \"date\"\r",
+									"                                            },\r",
+									"                                            \"end\": {\r",
+									"                                                \"type\": \"string\",\r",
+									"                                                \"format\": \"date\"\r",
+									"                                            },\r",
+									"                                            \"available\": {\"type\": \"number\"},\r",
+									"                                            \"allowedActions\": {\r",
+									"                                                \"type\": \"array\",\r",
+									"                                                \"items\": {\"type\": \"string\"}\r",
+									"                                            },\r",
+									"                                        }\r",
+									"                                    }\r",
+									"                                },\r",
+									"                            }\r",
+									"                        }\r",
+									"                    },\r",
+									"                }\r",
+									"            },           \r",
+									"            \"success\": {\"type\": \"boolean\"},\r",
+									"            \"array\": {\"type\": \"array\"},\r",
+									"        }\r",
+									"    }  \r",
+									"\t\r",
+									"\tpm.test(\"Validate if correct response schema\", ()=> {\r",
+									"\t    pm.response.to.have.jsonSchema(schema);\r",
+									"\t});\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://app.lodgify{{env}}.com/api/availability/calendar/{{propertyId}}/{{roomTypeId}}/?periodStart=2022-03-11&periodEnd=2022-06-11",
+							"protocol": "https",
+							"host": [
+								"app",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"availability",
+								"calendar",
+								"{{propertyId}}",
+								"{{roomTypeId}}",
+								""
+							],
+							"query": [
+								{
+									"key": "periodStart",
+									"value": "2022-03-11"
+								},
+								{
+									"key": "periodEnd",
+									"value": "2022-06-11"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/properties",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code == 200 ) {\t\r",
+									"\r",
+									"    pm.test(\"Verify if correct response body type\", () => {\r",
+									"        pm.response.to.be.json;\r",
+									"    });\r",
+									"    \r",
+									"\tconst schema = {\r",
+									"\t\t\"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"data\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                    \"properties\": {\r",
+									"                        \"type\": \"array\",\r",
+									"                        \"items\": {\r",
+									"                            \"type\": \"object\",\r",
+									"                            \"properties\": {\r",
+									"                                \"id\": {\"type\": \"number\"},\r",
+									"                                \"name\": {\"type\": \"string\"},\r",
+									"                                \"roomTypes\": {\r",
+									"                                    \"type\": \"array\",\r",
+									"                                    \"items\": {\r",
+									"                                        \"type\": \"object\",\r",
+									"                                        \"properties\": {\r",
+									"                                            \"id\": {\"type\": \"number\"},\r",
+									"                                            \"name\": {\"type\": \"string\"},\r",
+									"                                            \"maxPeople\": {\"type\": \"number\"},\r",
+									"                                            \"numberOfRooms\": {\"type\": \"number\"},\r",
+									"                                        },\r",
+									"                                        \"required\": [\"id\"]\r",
+									"                                    }\r",
+									"                                }\r",
+									"                            }\r",
+									"                        }\r",
+									"                    }\r",
+									"                },\r",
+									"                \"required\": [\"properties\"]\r",
+									"            },\r",
+									"            \"success\": {\"type\": \"boolean\"},\r",
+									"            \"warnings\": {\"type\": \"array\"}\r",
+									"        },\r",
+									"        \"required\": [\"data\", \"success\", \"warnings\"]        \r",
+									"    }  \r",
+									"\t\r",
+									"\tpm.test(\"Validate if correct response schema\", ()=> {\r",
+									"\t    pm.response.to.have.jsonSchema(schema);\r",
+									"\t});\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://app.lodgify{{env}}.com/api/availability/properties",
+							"protocol": "https",
+							"host": [
+								"app",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"availability",
+								"properties"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/reservations",
+			"item": [
+				{
+					"name": "/quote",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code == 200 ) {\t\r",
+									"\r",
+									"    pm.test(\"Verify if correct response body type\", () => {\r",
+									"        pm.response.to.be.json;\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Validate response values\", () => {\t\r",
+									"        let jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData.success).to.be.eql(true);\r",
+									"    });\t\r",
+									"    \r",
+									"\tconst schema = {\r",
+									"\t\t\"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"data\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                    \"unavailableRoomTypes\": {\"type\": \"array\"},\r",
+									"                    \"quote\": {\r",
+									"                        \"type\": \"object\",\r",
+									"                        \"properties\": {\r",
+									"                            \"roomTypes\": {\r",
+									"                                \"type\": \"array\",\r",
+									"                                \"items\": {\r",
+									"                                    \"type\": \"object\",\r",
+									"                                    \"properties\": {\r",
+									"                                        \"name\": {\"type\": \"string\"},\r",
+									"                                        \"subtotal\": {\"type\": \"number\"},\r",
+									"                                        \"vatAmount\": {\"type\": \"number\"},\r",
+									"                                        \"priceTypes\": {\r",
+									"                                            \"type\": \"array\",\r",
+									"                                            \"items\": {\r",
+									"                                                \"type\": \"object\",\r",
+									"                                                \"properties\": {\r",
+									"                                                    \"isNegative\": {\"type\": \"boolean\"},\r",
+									"                                                    \"description\": {\"type\": \"string\"},\r",
+									"                                                    \"subtotal\": {\"type\": \"number\"},\r",
+									"                                                    \"type\": {\"type\": \"string\"},\r",
+									"                                                    \"prices\": {\r",
+									"                                                        \"type\": \"array\",\r",
+									"                                                        \"items\": {\r",
+									"                                                            \"type\": \"object\",\r",
+									"                                                            \"properties\": {\r",
+									"                                                                \"uid\": {\"type\": \"string\"},\r",
+									"                                                                \"isManual\": {\"type\": \"boolean\"},\r",
+									"                                                                \"isSaved\": {\"type\": \"boolean\"},\r",
+									"                                                                \"isDeleted\": {\"type\": \"boolean\"},\r",
+									"                                                                \"isRemoved\": {\"type\": \"boolean\"},\r",
+									"                                                                \"isExcluded\": {\"type\": \"boolean\"},\r",
+									"                                                                \"description\": {\"type\": \"string\"},\r",
+									"                                                                \"descriptionGuest\": {\"type\": [\"string\",\"null\"]},\r",
+									"                                                                \"grossAmount\": {\"type\": \"number\"},\r",
+									"                                                                \"netAmount\": {\"type\": \"number\"},\r",
+									"                                                                \"amount\": {\"type\": \"number\"},\r",
+									"                                                                \"vatAmount\": {\"type\": \"number\"},\r",
+									"                                                                \"vat\": {\"type\": \"number\"},\r",
+									"                                                                \"isVatExclusive\": {\"type\": \"boolean\"},\r",
+									"                                                                \"fee_Id\": {\"type\": [\"null\", \"number\"]},\r",
+									"                                                                \"tax_Id\": {\"type\": \"null\"},\r",
+									"                                                                \"feeType\": {\"type\": [\"null\", \"string\"]},\r",
+									"                                                                \"roomRateType\": {\"type\": [\"string\", \"null\"]},\r",
+									"                                                                \"basePercentage\": {\"type\": \"null\"},\r",
+									"                                                            }\r",
+									"                                                        }\r",
+									"                                                    }\r",
+									"                                                }\r",
+									"                                            }\r",
+									"                                        },\r",
+									"                                        \"roomTypeId\": {\"type\": \"number\"},\r",
+									"                                        \"people\": {\"type\": \"number\"},\r",
+									"                                    }\r",
+									"                                }\r",
+									"                            },\r",
+									"                            \"addOns\": {\"type\": \"array\"},\r",
+									"                            \"removedRoomTypes\": {\"type\": \"array\"},\r",
+									"                            \"otherItems\": {\"type\": \"array\"},\r",
+									"                            \"removedOtherItems\": {\"type\": \"array\"},\r",
+									"                            \"addOnsSubtotal\": {\"type\": \"number\"},\r",
+									"                            \"addOnsVatSubtotal\": {\"type\": \"null\"},\r",
+									"                            \"roomRatesVatSubtotal\": {\"type\": \"number\"},\r",
+									"                            \"defaultRatePolicyName\": {\"type\": \"string\"},\r",
+									"                            \"totalScheduledPayments\": {\"type\": \"number\"},\r",
+									"                            \"totalToCollectManually\": {\"type\": \"number\"},\r",
+									"                            \"scheduledPayments\": {\r",
+									"                                \"type\": \"array\",\r",
+									"                                \"items\": {\r",
+									"                                    \"type\": \"object\",\r",
+									"                                    \"properties\": {\r",
+									"                                        \"dateDue\": {\"type\": \"string\"},\r",
+									"                                        \"amount\": {\"type\": \"number\"},\r",
+									"                                    }\r",
+									"                                }\r",
+									"                            },\r",
+									"                            \"cancellationRefunds\": {\"type\": \"array\"},\r",
+									"                            \"totalScheduledRefunds\": {\"type\": \"number\"},\r",
+									"                            \"expirationHours\": {\"type\": \"number\"},\r",
+									"                            \"cancellationPolicyText\": {\"type\": \"string\"},\r",
+									"                            \"securityDepositText\": {\"type\": \"string\"},\r",
+									"                            \"scheduledPolicyText\": {\"type\": \"string\"},\r",
+									"                            \"isReadOnly\": {\"type\": \"boolean\"},\r",
+									"                            \"isVatIncluded\": {\"type\": \"boolean\"},\r",
+									"                            \"amountGross\": {\"type\": \"number\"},\r",
+									"                            \"vatAmount\": {\"type\": \"number\"},\r",
+									"                            \"rentalAgreement\": {\"type\": \"string\"},\r",
+									"                            \"rentalAgreementEmpty\": {\"type\": \"boolean\"},\r",
+									"                            \"rentalAgreementUrl\": {\"type\": \"string\"},\r",
+									"                            \"warnings\": {\"type\": \"array\"},\r",
+									"                            \"bookability\": {\"type\": \"string\"},\r",
+									"                            \"uid\": {\"type\": \"string\"},\r",
+									"                            \"propertyId\": {\"type\": \"number\"},\r",
+									"                            \"dateArrival\": {\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"format\": \"date\"\r",
+									"                            },\r",
+									"                            \"dateDeparture\": {\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"format\": \"date\"\r",
+									"                            },\r",
+									"                            \"numberOfPets\": {\"type\": \"number\"},\r",
+									"                            \"hasTotals\": {\"type\": \"boolean\"},\r",
+									"                            \"currencyCode\": {\"type\": \"string\"},\r",
+									"                            \"isPolicyActive\": {\"type\": \"boolean\"},\r",
+									"                            \"sendQuote\": {\"type\": \"boolean\"},\r",
+									"                            \"websiteId\": {\"type\": \"number\"},\r",
+									"                            \"overrideRatePolicyUserId\": {\"type\": \"null\"},\r",
+									"                            \"forceEmptyRatePolicy\": {\"type\": \"boolean\"},\r",
+									"                            \"overrideBookability\": {\"type\": \"null\"},\r",
+									"                            \"overrideExpirationHours\": {\"type\": \"null\"},\r",
+									"                            \"derivedRateId\": {\"type\": \"number\"},\r",
+									"                            \"overrideRatePolicy\": {\"type\": \"null\"}\r",
+									"                        }\r",
+									"                    },\r",
+									"                }\r",
+									"            },\r",
+									"            \"success\": {\"type\": \"boolean\"},\r",
+									"            \"warnings\": {\"type\": \"array\"}\r",
+									"        },\r",
+									"        \"required\": [\"success\", \"data\", \"warnings\"]\r",
+									"    }  \r",
+									"\t\r",
+									"\tpm.test(\"Validate if correct response schema\", ()=> {\r",
+									"\t    pm.response.to.have.jsonSchema(schema);\r",
+									"\t});\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"quote\": {\r\n    \"roomTypes\": [\r\n      {\r\n        \"name\": \"RoomType\",\r\n        \"subtotal\": 6075,\r\n        \"vatAmount\": 0,\r\n        \"priceTypes\": [\r\n          {\r\n            \"isNegative\": false,\r\n            \"description\": \"Room Rate\",\r\n            \"subtotal\": 6000,\r\n            \"type\": \"RoomRate\",\r\n            \"prices\": [\r\n              {\r\n                \"uid\": \"RoomRate-RoomType-434903-Stay\",\r\n                \"isManual\": false,\r\n                \"isSaved\": true,\r\n                \"isDeleted\": false,\r\n                \"isRemoved\": false,\r\n                \"isExcluded\": false,\r\n                \"description\": \"434903\",\r\n                \"descriptionGuest\": null,\r\n                \"grossAmount\": 6000,\r\n                \"netAmount\": 6000,\r\n                \"amount\": 6000,\r\n                \"vatAmount\": 0,\r\n                \"vat\": 0,\r\n                \"isVatExclusive\": false,\r\n                \"fee_Id\": null,\r\n                \"tax_Id\": null,\r\n                \"feeType\": null,\r\n                \"roomRateType\": \"Stay\",\r\n                \"basePercentage\": null\r\n              }\r\n            ]\r\n          },\r\n          {\r\n            \"isNegative\": true,\r\n            \"description\": \"Promotion\",\r\n            \"subtotal\": 0,\r\n            \"type\": \"Promotion\",\r\n            \"prices\": []\r\n          },\r\n          {\r\n            \"isNegative\": false,\r\n            \"description\": \"Fees\",\r\n            \"subtotal\": 75,\r\n            \"type\": \"Fee\",\r\n            \"prices\": [\r\n              {\r\n                \"uid\": \"Fee-RoomType-434903-Cleaning-53604\",\r\n                \"isManual\": false,\r\n                \"isSaved\": true,\r\n                \"isDeleted\": false,\r\n                \"isRemoved\": false,\r\n                \"isExcluded\": false,\r\n                \"description\": \"Cleaning\",\r\n                \"descriptionGuest\": null,\r\n                \"grossAmount\": 75,\r\n                \"netAmount\": 75,\r\n                \"amount\": 75,\r\n                \"vatAmount\": 0,\r\n                \"vat\": 0,\r\n                \"isVatExclusive\": false,\r\n                \"fee_Id\": 53604,\r\n                \"tax_Id\": null,\r\n                \"feeType\": \"Cleaning\",\r\n                \"roomRateType\": null,\r\n                \"basePercentage\": null\r\n              }\r\n            ]\r\n          },\r\n          {\r\n            \"isNegative\": false,\r\n            \"description\": \"Taxes\",\r\n            \"subtotal\": 0,\r\n            \"type\": \"Tax\",\r\n            \"prices\": []\r\n          }\r\n        ],\r\n        \"roomTypeId\": 434903,\r\n        \"people\": 2\r\n      }\r\n    ],\r\n    \"addOns\": [],\r\n    \"removedRoomTypes\": [],\r\n    \"otherItems\": [],\r\n    \"removedOtherItems\": [],\r\n    \"addOnsSubtotal\": 0,\r\n    \"addOnsVatSubtotal\": null,\r\n    \"roomRatesVatSubtotal\": 0,\r\n    \"defaultRatePolicyName\": \"Primary policy\",\r\n    \"totalScheduledPayments\": 6075,\r\n    \"totalToCollectManually\": 0,\r\n    \"scheduledPayments\": [\r\n      {\r\n        \"dateDue\": \"On agreement\",\r\n        \"amount\": 3037.5\r\n      },\r\n      {\r\n        \"dateDue\": \"2022-04-12\",\r\n        \"amount\": 3037.5\r\n      }\r\n    ],\r\n    \"cancellationRefunds\": [],\r\n    \"totalScheduledRefunds\": 0,\r\n    \"expirationHours\": 48,\r\n    \"cancellationPolicyText\": \"All paid prepayments are non-refundable.\",\r\n    \"securityDepositText\": \"No damage deposit is due.\",\r\n    \"scheduledPolicyText\": \"50% due at time of booking.\\r\\nRemaining balance due 7 days before arrival.\\r\\n\",\r\n    \"isReadOnly\": false,\r\n    \"isVatIncluded\": true,\r\n    \"amountGross\": 6075,\r\n    \"vatAmount\": 0,\r\n    \"rentalAgreement\": \"734473a2-3cf3-4805-bf34-39e3a170e3da\",\r\n    \"rentalAgreementEmpty\": true,\r\n    \"rentalAgreementUrl\": \"\",\r\n    \"warnings\": [],\r\n    \"bookability\": \"BookingRequest\",\r\n    \"uid\": \"\",\r\n    \"propertyId\": 369246,\r\n    \"dateArrival\": \"2022-04-19\",\r\n    \"dateDeparture\": \"2022-04-22\",\r\n    \"numberOfPets\": 0,\r\n    \"hasTotals\": true,\r\n    \"currencyCode\": \"USD\",\r\n    \"isPolicyActive\": true,\r\n    \"sendQuote\": true,\r\n    \"websiteId\": 352830,\r\n    \"overrideRatePolicyUserId\": null,\r\n    \"forceEmptyRatePolicy\": false,\r\n    \"overrideBookability\": null,\r\n    \"overrideExpirationHours\": null,\r\n    \"derivedRateId\": 0,\r\n    \"overrideRatePolicy\": null\r\n  },\r\n  \"sourceText\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://app.lodgify{{env}}.com/api/reservations/quote",
+							"protocol": "https",
+							"host": [
+								"app",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"reservations",
+								"quote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/permissions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code == 200 ) {\t\r",
+									"\r",
+									"    pm.test(\"Verify if correct response body type\", () => {\r",
+									"        pm.response.to.be.json;\r",
+									"    });\r",
+									"    \r",
+									"\tconst schema = {\r",
+									"\t\t\"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"data\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                    \"canViewReports\": {\"type\": \"boolean\"},\r",
+									"                    \"canDownloadBookingReport\": {\"type\": \"boolean\"},\r",
+									"                    \"canSyncCalendarViaICal\": {\"type\": \"boolean\"},\r",
+									"                    \"canOnlyViewCalendarAndReservations\": {\"type\": \"boolean\"},\r",
+									"                    \"canManageRatePolicies\": {\"type\": \"boolean\"},\r",
+									"                    \"canEditAssignedProperties\": {\"type\": \"boolean\"},\r",
+									"                    \"canViewBookingSource\": {\"type\": \"boolean\"},\r",
+									"                    \"canManagePropertySettings\": {\"type\": \"boolean\"},\r",
+									"                    \"canUseLodgifyPayments\": {\"type\": \"boolean\"},\r",
+									"                    \"canViewBookingTransactionReports\": {\"type\": \"boolean\"},\r",
+									"                    \"canViewLodgifyPaymentsReports\": {\"type\": \"boolean\"},\r",
+									"                    \"canViewCalendar\": {\"type\": \"boolean\"},\r",
+									"                    \"canViewEmailNotifications\": {\"type\": \"boolean\"},\r",
+									"                    \"canViewMailBox\": {\"type\": \"boolean\"},\r",
+									"                    \"canCreateBooking\": {\"type\": \"boolean\"},\r",
+									"                    \"canCreateQuote\": {\"type\": \"boolean\"},\r",
+									"                    \"canViewPublicApiToken\": {\"type\": \"boolean\"},\r",
+									"                    \"canManageVat\": {\"type\": \"boolean\"},\r",
+									"                    \"canAuthorizeDamageDeposit\": {\"type\": \"boolean\"},\r",
+									"                    \"isPaymentConfigurationEnabled\": {\"type\": \"boolean\"},\r",
+									"                    \"canViewGuestName\": {\"type\": \"boolean\"},\r",
+									"                    \"canViewGuest\": {\"type\": \"boolean\"},\r",
+									"                    \"isSubOwner\": {\"type\": \"boolean\"}\r",
+									"                },\r",
+									"                \"required\": [\"canViewReports\",\"canDownloadBookingReport\",\"canSyncCalendarViaICal\",\"canOnlyViewCalendarAndReservations\",\"canManageRatePolicies\",\"canEditAssignedProperties\",\"canViewBookingSource\",\"canManagePropertySettings\",\"canUseLodgifyPayments\",\"canViewBookingTransactionReports\",\"canViewLodgifyPaymentsReports\",\"canViewCalendar\",\"canViewEmailNotifications\",\"canViewMailBox\",\"canCreateBooking\",\"canCreateQuote\",\"canViewPublicApiToken\",\"canManageVat\",\"canAuthorizeDamageDeposit\",\"isPaymentConfigurationEnabled\",\"canViewGuestName\",\"canViewGuest\",\"isSubOwner\"]\r",
+									"            },\r",
+									"            \"success\": {\"type\": \"boolean\"},\r",
+									"            \"warnings\": {\"type\": \"array\"}\r",
+									"        },\r",
+									"        \"required\": [\"data\", \"success\", \"warnings\"]\r",
+									"    }  \r",
+									"\t\r",
+									"\tpm.test(\"Validate if correct response schema\", ()=> {\r",
+									"\t    pm.response.to.have.jsonSchema(schema);\r",
+									"\t});\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://app.lodgify{{env}}.com/api/permissions",
+							"protocol": "https",
+							"host": [
+								"app",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/inbox",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code == 200 ) {\t\r",
+									"\r",
+									"    pm.test(\"Verify if correct response body type\", () => {\r",
+									"        pm.response.to.be.json;\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Save uid\", () => {\t\r",
+									"        let jsonData = pm.response.json();\r",
+									"        pm.collectionVariables.set(\"inboxUId\", jsonData.data.items[0].uid);\r",
+									"    });\t\r",
+									"    \r",
+									"\tconst schema = {\r",
+									"\t\t\"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"data\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                    \"lastModifiedToken\": {\"type\": \"string\"},\r",
+									"                    \"reportUrl\": {\"type\": \"string\"},\r",
+									"                    \"items\": {\r",
+									"                        \"type\": \"array\",\r",
+									"                        \"items\": {\"type\": \"object\"}\r",
+									"                    }\r",
+									"                }\r",
+									"            }\r",
+									"        }\r",
+									"    }  \r",
+									"\t\r",
+									"\tpm.test(\"Validate if correct response schema\", ()=> {\r",
+									"\t    pm.response.to.have.jsonSchema(schema);\r",
+									"\t});\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://app.lodgify{{env}}.com/api/reservations/inbox",
+							"protocol": "https",
+							"host": [
+								"app",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"reservations",
+								"inbox"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/inbox",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code == 200 ) {\t\r",
+									"\r",
+									"    pm.test(\"Verify if correct response body type\", () => {\r",
+									"        pm.response.to.be.json;\r",
+									"    });\r",
+									"    \r",
+									"\tconst schema = {\r",
+									"\t\t\"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"data\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                    \"uid\": {\"type\": \"string\"},\r",
+									"                    \"threadUid\": {\"type\": \"string\"},\r",
+									"                    \"nextMessage\": {\r",
+									"                        \"type\": \"object\",\r",
+									"                        \"properties\": {\r",
+									"                            \"messageRoute\": {\"type\": \"string\"},\r",
+									"                            \"readOnlyAttachments\": {\r",
+									"                                \"type\": \"array\",\r",
+									"                                \"items\": {\r",
+									"                                    \"type\": \"object\",\r",
+									"                                    \"properties\": {\r",
+									"                                        \"message\": {\"type\": \"string\"},\r",
+									"                                        \"name\": {\"type\": \"null\"}\r",
+									"                                    }\r",
+									"                                }\r",
+									"                            },\r",
+									"                        }\r",
+									"                    },\r",
+									"                    \"subject\": {\"type\": \"string\"},\r",
+									"                    \"message\": {\"type\": \"string\"},\r",
+									"                    \"notificationType\": {\"type\": \"string\"},\r",
+									"                    \"notificationData\": {\"type\": \"string\"},\r",
+									"                    \"initiator\": {\"type\": \"null\"},\r",
+									"                    \"attachments\": {\"type\": \"array\"}\r",
+									"                }\r",
+									"            },\r",
+									"            \"success\": {\"type\": \"boolean\"},\r",
+									"            \"warnings\": {\"type\": \"array\"}\r",
+									"        }\r",
+									"    }  \r",
+									"\t\r",
+									"\tpm.test(\"Validate if correct response schema\", ()=> {\r",
+									"\t    pm.response.to.have.jsonSchema(schema);\r",
+									"\t});\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quote\":{\r\n        \"roomTypes\":[\r\n            {\r\n                \"name\":\"RoomType\",\r\n                \"subtotal\":22275,\r\n                \"vatAmount\":0,\r\n                \"priceTypes\":[\r\n                {\r\n                    \"isNegative\":false,\r\n                    \"description\":\"Room Rate\",\r\n                    \"subtotal\":22000,\r\n                    \"type\":\"RoomRate\",\r\n                    \"prices\":[\r\n                        {\r\n                            \"uid\":\"RoomRate-RoomType-434903-Stay\",\r\n                            \"isManual\":false,\r\n                            \"isSaved\":true,\r\n                            \"isDeleted\":false,\r\n                            \"isRemoved\":false,\r\n                            \"isExcluded\":false,\r\n                            \"description\":\"434903\",\r\n                            \"descriptionGuest\":null,\r\n                            \"grossAmount\":22000,\r\n                            \"netAmount\":22000,\r\n                            \"amount\":22000,\r\n                            \"vatAmount\":0,\r\n                            \"vat\":0,\r\n                            \"isVatExclusive\":false,\r\n                            \"fee_Id\":null,\r\n                            \"tax_Id\":null,\r\n                            \"feeType\":null,\r\n                            \"roomRateType\":\"Stay\",\r\n                            \"basePercentage\":null\r\n                        }\r\n                    ]\r\n                },\r\n                {\r\n                    \"isNegative\":true,\r\n                    \"description\":\"Promotion\",\r\n                    \"subtotal\":0,\r\n                    \"type\":\"Promotion\",\r\n                    \"prices\":[]\r\n                },\r\n                {\r\n                    \"isNegative\":false,\r\n                    \"description\":\"Fees\",\r\n                    \"subtotal\":275,\r\n                    \"type\":\"Fee\",\r\n                    \"prices\":[\r\n                        {\r\n                            \"uid\":\"Fee-RoomType-434903-Cleaning-53604\",\r\n                            \"isManual\":false,\r\n                            \"isSaved\":true,\r\n                            \"isDeleted\":false,\r\n                            \"isRemoved\":false,\r\n                            \"isExcluded\":false,\r\n                            \"description\":\"Cleaning\",\r\n                            \"descriptionGuest\":null,\r\n                            \"grossAmount\":275,\r\n                            \"netAmount\":275,\r\n                            \"amount\":275,\r\n                            \"vatAmount\":0,\r\n                            \"vat\":0,\r\n                            \"isVatExclusive\":false,\r\n                            \"fee_Id\":53604,\r\n                            \"tax_Id\":null,\r\n                            \"feeType\":\"Cleaning\",\r\n                            \"roomRateType\":null,\r\n                            \"basePercentage\":null\r\n                        }\r\n                    ]\r\n                },\r\n                {\r\n                    \"isNegative\":false,\r\n                    \"description\":\"Taxes\",\r\n                    \"subtotal\":0,\r\n                    \"type\":\"Tax\",\r\n                    \"prices\":[]\r\n                }\r\n            ],\r\n            \"roomTypeId\":434903,\r\n            \"people\":2\r\n            }\r\n        ],\r\n        \"addOns\":[],\r\n        \"removedRoomTypes\":[],\r\n        \"otherItems\":[],\r\n        \"removedOtherItems\":[],\r\n        \"addOnsSubtotal\":0,\r\n        \"addOnsVatSubtotal\":null,\r\n        \"roomRatesVatSubtotal\":0,\r\n        \"defaultRatePolicyName\":\"Primary policy\",\r\n        \"totalScheduledPayments\":22275,\r\n        \"totalToCollectManually\":0,\r\n        \"scheduledPayments\":[\r\n            {\r\n                \"dateDue\":\"On agreement\",\r\n                \"amount\":22275\r\n            }\r\n        ],\r\n        \"cancellationRefunds\":[],\r\n        \"totalScheduledRefunds\":0,\r\n        \"expirationHours\":48,\r\n        \"cancellationPolicyText\":\"All paid prepayments are non-refundable.\",\r\n        \"securityDepositText\":\"No damage deposit is due.\",\r\n        \"scheduledPolicyText\":\"50% due at time of booking.\\r\\nRemaining balance due 7 days before arrival.\\r\\n\",\r\n        \"isReadOnly\":false,\r\n        \"isVatIncluded\":true,\r\n        \"amountGross\":22275,\r\n        \"vatAmount\":0,\r\n        \"rentalAgreement\":\"734473a2-3cf3-4805-bf34-39e3a170e3da\",\r\n        \"rentalAgreementEmpty\":true,\r\n        \"rentalAgreementUrl\":\"\",\r\n        \"warnings\":[],\r\n        \"bookability\":\"BookingRequest\",\r\n        \"uid\":\"\",\r\n        \"propertyId\":369246,\r\n        \"dateArrival\":\"2022-05-05\",\r\n        \"dateDeparture\":\"2022-05-16\",\r\n        \"numberOfPets\":0,\r\n        \"hasTotals\":true,\r\n        \"currencyCode\":\"USD\",\r\n        \"isPolicyActive\":true,\r\n        \"sendQuote\":true,\r\n        \"websiteId\":352830,\r\n        \"overrideRatePolicyUserId\":null,\r\n        \"forceEmptyRatePolicy\":false,\r\n        \"overrideBookability\":null,\r\n        \"overrideExpirationHours\":null,\r\n        \"derivedRateId\":0,\r\n        \"overrideRatePolicy\":null\r\n    },\r\n    \"guest\":{\r\n        \"name\":\"From the API\",\r\n        \"countryCode\":\"\",\r\n        \"email\":\"nelson.salazar@lodgify.com\",\r\n        \"phoneNumber\":\"\",\r\n        \"isPhoneNumberValid\":true,\r\n        \"language\":\"en\"\r\n    },\r\n    \"sourceText\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://app.lodgify{{env}}.com/api/reservations/inbox",
+							"protocol": "https",
+							"host": [
+								"app",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"reservations",
+								"inbox"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/inbox/{uid}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code == 200 ) {\t\r",
+									"\r",
+									"    pm.test(\"Verify if correct response body type\", () => {\r",
+									"        pm.response.to.be.json;\r",
+									"    });\r",
+									"    \r",
+									"\tconst schema = {\r",
+									"\t\t\"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"data\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                    \"requestedUid\": {\"type\": \"string\"},\r",
+									"                    \"booking\": {\r",
+									"                        \"type\": \"object\",\r",
+									"                        \"properties\": {\r",
+									"                            \"uid\": {\"type\": \"string\"},\r",
+									"                            \"type\": {\"type\": \"string\"},\r",
+									"                            \"id\": {\"type\": \"number\"},\r",
+									"                            \"threadUid\": {\"type\": \"string\"},\r",
+									"                            \"dateCreated\": {\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"format\": \"date\"\r",
+									"                            },\r",
+									"                            \"fullDateCreated\": {\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"format\": \"date-time\"\r",
+									"                            },\r",
+									"                            \"dateArrival\": {\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"format\": \"date\"\r",
+									"                            },\r",
+									"                            \"dateDeparture\": {\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"format\": \"date\"\r",
+									"                            },\r",
+									"                            \"generalStatus\": {\"type\": \"string\"},\r",
+									"                            \"allowedGeneralStatuses\": {\r",
+									"                                \"type\": \"array\",\r",
+									"                                \"items\": {\"type\": \"string\"}\r",
+									"                            },\r",
+									"                            \"allowedStatuses\": {\"type\": \"array\"},   \r",
+									"                            \"allowedActions\": {\r",
+									"                                \"type\": \"array\",\r",
+									"                                \"items\": {\"type\": \"string\"}\r",
+									"                            },\r",
+									"                            \"currencyCode\": {\"type\": \"string\"},\r",
+									"                            \"totalUnreadMessages\": {\"type\": \"number\"},\r",
+									"                            \"propertyId\": {\"type\": \"number\"},\r",
+									"                            \"propertyName\": {\"type\": \"string\"},\r",
+									"                            \"propertyImageUrl\": {\"type\": \"string\"},\r",
+									"                            \"status\": {\"type\": \"string\"},\r",
+									"                            \"roomTypes\": {\r",
+									"                                \"type\": \"array\",\r",
+									"                                \"items\": {\r",
+									"                                    \"type\": \"object\",\r",
+									"                                    \"properties\": {\r",
+									"                                        \"id\": {\"type\": \"number\"},\r",
+									"                                        \"roomTypeId\": {\"type\": \"number\"},\r",
+									"                                        \"imageUrl\": {\"type\": \"null\"},\r",
+									"                                        \"name\": {\"type\": \"string\"},\r",
+									"                                        \"people\": {\"type\": \"number\"},\r",
+									"                                    }\r",
+									"                                }\r",
+									"                            },\r",
+									"                            \"addOns\": {\"type\": \"array\"},\r",
+									"                            \"source\": {\"type\": \"string\"},\r",
+									"                            \"sourceText\": {\"type\": \"string\"},\r",
+									"                            \"sourceId\": {\"type\": \"string\"},\r",
+									"                            \"notes\": {\"type\": \"null\"},\r",
+									"                            \"language\": {\"type\": \"string\"},\r",
+									"                            \"ipAddress\": {\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"format\": \"ipv4\"\r",
+									"                            },\r",
+									"                            \"ipCountry\": {\"type\": \"null\"},\r",
+									"                            \"isDeleted\": {\"type\": \"boolean\"},\r",
+									"                            \"websiteId\": {\"type\": \"number\"},\r",
+									"                            \"bookability\": {\"type\": \"string\"},\r",
+									"                            \"isPolicyActive\": {\"type\": \"boolean\"},\r",
+									"                            \"amountPaid\": {\"type\": \"number\"},\r",
+									"                            \"amountOverdue\": {\"type\": \"number\"},\r",
+									"                            \"amountDue\": {\"type\": \"number\"},\r",
+									"                            \"totalTransactions\": {\"type\": \"number\"},\r",
+									"                            \"changeRequestId\": {\"type\": \"null\"},\r",
+									"                            \"promotionCode\": {\"type\": \"null\"},\r",
+									"                            \"externalUrl\": {\"type\": \"null\"},\r",
+									"                            \"externalTotal\": {\"type\": \"number\"},\r",
+									"                            \"nights\": {\"type\": \"number\"}\r",
+									"                        }\r",
+									"                    },\r",
+									"                    \"guest\": {\r",
+									"                        \"type\": \"object\",\r",
+									"                        \"properties\": {\r",
+									"                            \"paymentMethod\": {\"type\": \"null\"},\r",
+									"                            \"uid\": {\"type\": \"string\"},\r",
+									"                            \"name\": {\"type\": \"string\"},\r",
+									"                            \"email\": {\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"format\": \"email\" \r",
+									"                            },\r",
+									"                            \"phoneNumber\": {\"type\": \"null\"},\r",
+									"                            \"locale\": {\"type\": \"null\"},\r",
+									"                            \"streetAddress1\": {\"type\": [\"string\",\"null\"]},\r",
+									"                            \"streetAddress2\": {\"type\": [\"string\",\"null\"]},\r",
+									"                            \"city\": {\"type\": [\"string\",\"null\"]},\r",
+									"                            \"countryId\": {\"type\": [\"string\",\"null\"]},\r",
+									"                            \"countryCode\": {\"type\": [\"string\",\"null\"]},\r",
+									"                            \"postalCode\": {\"type\": [\"string\",\"null\"]},\r",
+									"                            \"state\": {\"type\": [\"string\",\"null\"]},\r",
+									"                            \"country\": {\"type\": \"string\"}\r",
+									"                        }\r",
+									"                    },\r",
+									"                    \"archivedOrders\": {\"type\": \"array\"},\r",
+									"                    \"transactions\": {\"type\": \"array\"},\r",
+									"                    \"currentOrder\": {\r",
+									"                        \"type\": \"object\",\r",
+									"                        \"properties\": {\r",
+									"                            \"id\": {\"type\": \"number\"},\r",
+									"                            \"dateArrival\": {\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"format\": \"date\"\r",
+									"                            },\r",
+									"                            \"dateDeparture\": {\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"format\": \"date\"\r",
+									"                            },\r",
+									"                            \"nights\": {\"type\": \"number\"},\r",
+									"                            \"propertyId\": {\"type\": \"number\"},\r",
+									"                            \"propertyName\": {\"type\": \"string\"},\r",
+									"                            \"currencyCode\": {\"type\": \"string\"},\r",
+									"                            \"status\": {\"type\": \"string\"},\r",
+									"                            \"isReadOnly\": {\"type\": \"boolean\"},\r",
+									"                            \"allowedStatuses\": {\r",
+									"                                \"type\": \"array\",\r",
+									"                                \"items\": {\"type\": \"string\"}\r",
+									"                            },\r",
+									"                            \"applicableRejectedReasons\": {\"type\": \"array\"},\r",
+									"                            \"amountGross\": {\"type\": \"number\"},\r",
+									"                            \"amountNet\": {\"type\": \"number\"},\r",
+									"                            \"dateCancelled\": {\"type\": \"null\"},\r",
+									"                            \"amountCancelled\": {\"type\": \"null\"},\r",
+									"                            \"amountToCollect\": {\"type\": \"number\"},\r",
+									"                            \"roomTypeItems\": {\r",
+									"                                \"type\": \"array\",\r",
+									"                                \"items\": {\r",
+									"                                    \"type\": \"object\",\r",
+									"                                    \"properties\": {\r",
+									"                                        \"roomTypeId\": {\"type\": \"number\"},\r",
+									"                                        \"people\": {\"type\": \"number\"},\r",
+									"                                        \"description\": {\"type\": \"string\"},\r",
+									"                                        \"subtotal\": {\"type\": \"number\"},\r",
+									"                                        \"prices\": {\r",
+									"                                            \"type\": \"array\",\r",
+									"                                            \"items\": {\r",
+									"                                                \"type\": \"object\",\r",
+									"                                                \"properties\": {\r",
+									"                                                    \"type\": {\"type\": \"string\"},\r",
+									"                                                    \"feeType\": {\"type\": \"null\"},\r",
+									"                                                    \"amount\": {\"type\": \"number\"},\r",
+									"                                                    \"vatAmount\": {\"type\": \"number\"},\r",
+									"                                                    \"netAmount\": {\"type\": \"number\"},\r",
+									"                                                    \"grossAmount\": {\"type\": \"number\"},\r",
+									"                                                    \"description\": {\"type\": \"string\"}\r",
+									"                                                }\r",
+									"                                            }\r",
+									"                                        }\r",
+									"                                    }\r",
+									"                                }\r",
+									"                            },\r",
+									"                            \"addOnItems\": {\"type\": \"array\"},\r",
+									"                            \"otherItems\": {\"type\": \"array\"},\r",
+									"                            \"totalVat\": {\"type\": \"null\"},\r",
+									"                            \"totalExcludingVat\": {\"type\": \"null\"},\r",
+									"                            \"totalIncludingVat\": {\r",
+									"                                \"type\": \"object\",\r",
+									"                                \"properties\": {\r",
+									"                                    \"type\": {\"type\": \"string\"},\r",
+									"                                    \"feeType\": {\"type\": \"null\"},\r",
+									"                                    \"amount\": {\"type\": \"number\"},\r",
+									"                                    \"vatAmount\": {\"type\": \"null\"},\r",
+									"                                    \"netAmount\": {\"type\": \"number\"},\r",
+									"                                    \"grossAmount\": {\"type\": \"number\"},\r",
+									"                                    \"description\": {\"type\": \"string\"}\r",
+									"                                }                                \r",
+									"                            },\r",
+									"                            \"scheduledPayments\": {\r",
+									"                                \"type\": \"array\",\r",
+									"                                \"items\": {\r",
+									"                                    \"type\": \"object\",\r",
+									"                                    \"properties\": {\r",
+									"                                        \"id\": {\"type\": \"number\"},\r",
+									"                                        \"dateDue\": {\"type\": \"null\"},\r",
+									"                                        \"dateRequested\": {\"type\": \"null\"},\r",
+									"                                        \"requested\": {\"type\": \"boolean\"},\r",
+									"                                        \"status\": {\"type\": \"string\"},\r",
+									"                                        \"processingStatus\": {\"type\": \"string\"},\r",
+									"                                        \"amount\": {\"type\": \"number\"},\r",
+									"                                        \"refundTransactionId\": {\"type\": \"null\"},\r",
+									"                                        \"allowedActions\": {\"type\": \"array\"},\r",
+									"                                        \"schedulerType\": {\"type\": \"string\"}\r",
+									"                                    }\r",
+									"                                }\r",
+									"                            },\r",
+									"                            \"cancellationRefunds\": {\"type\": \"array\"},\r",
+									"                            \"securityDepositPayments\": {\"type\": \"array\"},\r",
+									"                            \"totalScheduled\": {\"type\": \"number\"},\r",
+									"                            \"totalScheduledRefunds\": {\"type\": \"number\"},\r",
+									"                            \"totalManual\": {\"type\": \"number\"},\r",
+									"                            \"dateAgreed\": {\"type\": \"null\"},\r",
+									"                            \"securityDepositText\": {\"type\": \"string\"},\r",
+									"                            \"securityDepositAmount\": {\"type\": \"number\"},\r",
+									"                            \"cancellationPolicyText\": {\"type\": \"string\"},\r",
+									"                            \"scheduledPolicyText\": {\"type\": \"string\"},\r",
+									"                            \"ownerPayout\": {\"type\": \"number\"},\r",
+									"                            \"isPolicyActive\": {\"type\": \"boolean\"},\r",
+									"                            \"ratePolicyName\": {\"type\": \"string\"},\r",
+									"                            \"expirationHours\": {\"type\": \"null\"},\r",
+									"                            \"expirationDate\": {\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"format\": \"date-time\"\r",
+									"                            },\r",
+									"                            \"rentalAgreement\": {\"type\": \"string\"},\r",
+									"                            \"rentalAgreementAccepted\": {\"type\": \"boolean\"},\r",
+									"                            \"rentalAgreementEmpty\": {\"type\": \"boolean\"},\r",
+									"                            \"rentalAgreementUrl\": {\"type\": \"string\"},\r",
+									"                            \"damageProtection\": {\"type\": \"null\"},\r",
+									"                        }\r",
+									"                    },\r",
+									"                    \"paymentRequest\": {\"type\": \"null\"},\r",
+									"                    \"subOwner\": {\"type\": \"null\"},\r",
+									"                    \"externalQuote\": {\"type\": \"null\"},\r",
+									"                    \"notification\": {\r",
+									"                        \"type\": \"object\",\r",
+									"                        \"properties\": {\r",
+									"                            \"lastTransactionStatus\": {\"type\": \"null\"}\r",
+									"                        }\r",
+									"                    },\r",
+									"                    \"damageProtection\": {\"type\": \"null\"}\r",
+									"                }\r",
+									"            },\r",
+									"            \"success\": {\"type\": \"boolean\"},\r",
+									"            \"warnings\": {\"type\": \"array\"},\r",
+									"        }\r",
+									"    }  \r",
+									"\t\r",
+									"\tpm.test(\"Validate if correct response schema\", ()=> {\r",
+									"\t    pm.response.to.have.jsonSchema(schema);\r",
+									"\t});\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://app.lodgify{{env}}.com/api/reservations/inbox/{{inboxUId}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"reservations",
+								"inbox",
+								"{{inboxUId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/inbox/{uid}/messages",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code == 200 ) {\r",
+									"\r",
+									"    pm.test(\"Verify if correct response body type\", () => {\r",
+									"        pm.response.to.be.json;\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Verify response values\", () => {\t\r",
+									"        let jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData.success).to.be.eql(true);\r",
+									"    });\r",
+									"\r",
+									"\tconst schema = {\r",
+									"\t\t\"type\": \"object\",\r",
+									"\t\t\"properties\": {\r",
+									"\t\t\t\"data\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                    \"messages\": {\r",
+									"                        \"type\": \"array\",\r",
+									"                        \"items\": {\r",
+									"                            \"type\": \"object\",\r",
+									"                            \"properties\": {\r",
+									"                                \"id\": {\"type\": \"number\"},\r",
+									"                                \"subject\": {\"type\": \"string\"},\r",
+									"                                \"message\": {\"type\": \"string\"},\r",
+									"                                \"changeLogs\": {\r",
+									"                                    \"type\": \"array\",\r",
+									"                                    \"items\": {\r",
+									"                                        \"type\": \"object\",\r",
+									"                                        \"properties\": {\r",
+									"                                            \"category\": {\"type\": \"string\"},\r",
+									"                                            \"changes\": {\r",
+									"                                                \"type\": \"array\",\r",
+									"                                                \"items\": {\r",
+									"                                                    \"type\": \"object\",\r",
+									"                                                    \"properties\": {\r",
+									"                                                        \"changeName\": {\"type\": \"string\"},\r",
+									"                                                        \"original\": {\"type\": \"string\"},\r",
+									"                                                        \"current\": {\"type\": \"string\"}\r",
+									"                                                    }\r",
+									"                                                }\r",
+									"                                            }\r",
+									"                                        }\r",
+									"                                    }\r",
+									"                                },\r",
+									"                                \"type\": {\"type\": \"string\"},\r",
+									"                                \"dateCreatedUTC\": {\r",
+									"                                    \"type\": \"string\",\r",
+									"                                    \"format\": \"date-time\"\r",
+									"                                },\r",
+									"                                \"notificationType\": {\"type\": [\"string\", \"null\"]},\r",
+									"                                \"notificationTitle\": {\"type\": [\"string\", \"null\"]},\r",
+									"                                \"attachments\": {\"type\": \"array\"},\r",
+									"                                \"messageStatus\": {\"type\": \"string\"},\r",
+									"                                \"messageStatusUpdateError\": {\"type\": [\"string\", \"null\"]},\r",
+									"                                \"isRead\": {\"type\": \"boolean\"}\r",
+									"                            },\r",
+									"                            \"additionalProperties\": false\r",
+									"                        }\r",
+									"                    }\r",
+									"                }\r",
+									"            },\r",
+									"            \"success\": {\"type\": \"boolean\"},\r",
+									"            \"warnings\": {\"type\": \"array\"}\r",
+									"\t\t},\r",
+									"        \"required\": [\"success\"],\r",
+									"        \"additionalProperties\": false\r",
+									"\t}    \r",
+									"\t\r",
+									"\tpm.test(\"Validate if correct response schema\", ()=> {\r",
+									"\t    pm.response.to.have.jsonSchema(schema);\r",
+									"\t    console.log(\"Response schema validation complete\")\r",
+									"\t});\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://app.lodgify{{env}}.com/api/reservations/inbox/{{inboxUId}}/messages",
+							"protocol": "https",
+							"host": [
+								"app",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"reservations",
+								"inbox",
+								"{{inboxUId}}",
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/threadInbox",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code == 200 ) {\t\r",
+									"\r",
+									"    pm.test(\"Verify if correct response body type\", () => {\r",
+									"        pm.response.to.be.json;\r",
+									"    });\r",
+									"    \r",
+									"\tconst schema = {\r",
+									"\t\t\"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"data\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                    \"unreadThreads\": {\"type\": \"number\"}\r",
+									"                },\r",
+									"                \"required\": [\"unreadThreads\"]\r",
+									"            },\r",
+									"            \"success\": {\"type\": \"boolean\"},\r",
+									"            \"warnings\": {\"type\": \"array\"}\r",
+									"        },\r",
+									"        \"required\": [\"data\", \"success\", \"warnings\"]        \r",
+									"    }  \r",
+									"\t\r",
+									"\tpm.test(\"Validate if correct response schema\", ()=> {\r",
+									"\t    pm.response.to.have.jsonSchema(schema);\r",
+									"\t});\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://app.lodgify{{env}}.com/api/reservations/threadInbox",
+							"protocol": "https",
+							"host": [
+								"app",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"reservations",
+								"threadInbox"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/threads",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code == 200 ) {\t\r",
+									"\r",
+									"    pm.test(\"Verify if correct response body type\", () => {\r",
+									"        pm.response.to.be.json;\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Save uid\", () => {\t\r",
+									"        let jsonData = pm.response.json();\r",
+									"        pm.collectionVariables.set(\"threadUid\", jsonData.data.items[0].uid);\r",
+									"    });\r",
+									"    \r",
+									"\tconst schema = {\r",
+									"\t\t\"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"data\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                    \"lastModifiedToken\": {\"type\": \"string\"},\r",
+									"                    \"items\": {\r",
+									"                        \"type\": \"array\",\r",
+									"                        \"items\": {\r",
+									"                            \"type\": \"object\",\r",
+									"                            \"properties\": {\r",
+									"                                \"guestName\": {\"type\": \"string\"},\r",
+									"                                \"status\": {\"type\": \"string\"},\r",
+									"                                \"source\": {\"type\": \"string\"},\r",
+									"                                \"unreadCount\": {\"type\": \"number\"},\r",
+									"                                \"lastMessageSummary\": {\"type\": \"string\"},\r",
+									"                                \"lastMessageDate\": {\r",
+									"                                    \"type\": \"string\",\r",
+									"                                    \"format\": \"date-time\"\r",
+									"                                },\r",
+									"                                \"isRead\": {\"type\": \"boolean\"},\r",
+									"                                \"uid\": {\"type\": \"string\"}\r",
+									"                            }\r",
+									"                        }   \r",
+									"                    }\r",
+									"                },\r",
+									"                \"required\": [\"lastModifiedToken\",\"items\"]\r",
+									"            },\r",
+									"            \"success\": {\"type\": \"boolean\"},\r",
+									"            \"warnings\": {\"type\": \"array\"}\r",
+									"        },\r",
+									"        \"required\": [\"data\", \"success\", \"warnings\"]\r",
+									"    }  \r",
+									"\t\r",
+									"\tpm.test(\"Validate if correct response schema\", ()=> {\r",
+									"\t    pm.response.to.have.jsonSchema(schema);\r",
+									"\t});\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://app.lodgify{{env}}.com/api/reservations/threads",
+							"protocol": "https",
+							"host": [
+								"app",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"reservations",
+								"threads"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/threads/{{threadUid}}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code == 200 ) {\t\r",
+									"\r",
+									"    pm.test(\"Verify if correct response body type\", () => {\r",
+									"        pm.response.to.be.json;\r",
+									"    });\r",
+									"    \r",
+									"\tconst schema = {\r",
+									"\t\t\"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"data\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                    \"thread_Guid\": {\"type\": \"string\"},\r",
+									"                    \"userId\": {\"type\": \"number\"},\r",
+									"                    \"guestName\": {\"type\": \"string\"},\r",
+									"                    \"guestEmail\": {\"type\": \"string\"},\r",
+									"                    \"lastMessageDate\": {\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"format\": \"date-time\"\r",
+									"                    },\r",
+									"                    \"inboxUid\": {\"type\": \"string\"},\r",
+									"                    \"isRead\": {\"type\": \"boolean\"},\r",
+									"                    \"messages\": {\r",
+									"                        \"type\": \"array\",\r",
+									"                        \"items\": {\r",
+									"                            \"type\": \"object\",\r",
+									"                            \"properties\": {\r",
+									"                                \"id\": {\"type\": \"number\"},\r",
+									"                                \"subject\": {\"type\": \"string\"},\r",
+									"                                \"message\": {\"type\": \"string\"},\r",
+									"                                \"changeLogs\": {\"type\": \"array\"},\r",
+									"                                \"type\": {\"type\": \"string\"},\r",
+									"                                \"dateCreatedUTC\": {\r",
+									"                                    \"type\": \"string\",\r",
+									"                                    \"format\": \"date-time\"\r",
+									"                                },\r",
+									"                                \"notificationType\": {\"type\": [\"string\",\"null\"]},\r",
+									"                                \"notificationTitle\": {\"type\": [\"string\",\"null\"]},\r",
+									"                                \"attachments\": {\"type\": \"array\"},\r",
+									"                                \"messageStatus\": {\"type\": \"string\"},\r",
+									"                                \"messageStatusUpdateError\": {\"type\": \"null\"},\r",
+									"                                \"isRead\": {\"type\": \"boolean\"},\r",
+									"                            }\r",
+									"                        }\r",
+									"                    }\r",
+									"                }\r",
+									"            },\r",
+									"            \"success\": {\"type\": \"boolean\"},\r",
+									"            \"warnings\": {\"type\": \"array\"}\r",
+									"        },\r",
+									"        \"required\": [\"data\", \"success\", \"warnings\"]        \r",
+									"    }  \r",
+									"\t\r",
+									"\tpm.test(\"Validate if correct response schema\", ()=> {\r",
+									"\t    pm.response.to.have.jsonSchema(schema);\r",
+									"\t});\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://app.lodgify{{env}}.com/api/reservations/threads/{{threadUid}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"reservations",
+								"threads",
+								"{{threadUid}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/payment",
+			"item": [
+				{
+					"name": "/settings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code == 200 ) {\t\r",
+									"\r",
+									"    pm.test(\"Verify if correct response body type\", () => {\r",
+									"        pm.response.to.be.json;\r",
+									"    });\r",
+									"    \r",
+									"\tconst schema = {\r",
+									"\t\t\"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"data\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                    \"hasPerWebsiteConfigurations\": {\"type\": \"boolean\"},\r",
+									"                    \"stripeFeePercentageByTransaction\": {\"type\": \"number\"},\r",
+									"                    \"feeVatPercentage\": {\"type\": \"number\"},\r",
+									"                    \"translatedVatName\": {\"type\": \"string\"},\r",
+									"                    \"creditCardNonStripeFeePercentageByTransaction\": {\"type\": \"number\"},\r",
+									"                    \"paypalFeePercentageByTransaction\": {\"type\": \"number\"},\r",
+									"                    \"manual\": {\r",
+									"                        \"type\": \"object\",\r",
+									"                        \"properties\": {\r",
+									"                            \"type\": {\"type\": \"string\"},\r",
+									"                            \"isEnabled\": {\"type\": \"boolean\"},\r",
+									"                            \"iban\": {\r",
+									"                                \"type\": \"object\",\r",
+									"                                \"properties\": {\r",
+									"                                    \"number\": {\"type\": \"string\"},\r",
+									"                                    \"swift\": {\"type\": \"string\"},\r",
+									"                                    \"bankName\": {\"type\": \"string\"},\r",
+									"                                    \"recipient\": {\"type\": \"string\"},\r",
+									"                                    \"reference\": {\"type\": \"string\"}\r",
+									"                                }\r",
+									"                            },\r",
+									"                            \"instructions\": {\"type\": \"null\"}\r",
+									"                        },\r",
+									"                    },\r",
+									"                    \"payPal\": {\"type\": \"null\"},\r",
+									"                    \"lodgifyPayments\": {\"type\": \"null\"},\r",
+									"                    \"creditCard\": {\"type\": \"null\"},\r",
+									"                    \"creditCardGatewayList\": {\r",
+									"                        \"type\": \"array\",\r",
+									"                        \"items\": {\"type\": \"string\"}\r",
+									"                    },\r",
+									"                    \"notAvailableCreditCardGatewayList\": {\"type\": \"array\"},\r",
+									"                    \"configuredCreditCardGateways\": {\"type\": \"array\"}\r",
+									"                }\r",
+									"            },\r",
+									"            \"success\": {\"type\": \"boolean\"},\r",
+									"            \"warnings\": {\"type\": \"array\"}\r",
+									"        },\r",
+									"        \"required\": [\"data\", \"success\", \"warnings\"]        \r",
+									"    }  \r",
+									"\t\r",
+									"\tpm.test(\"Validate if correct response schema\", ()=> {\r",
+									"\t    pm.response.to.have.jsonSchema(schema);\r",
+									"\t});\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://app.lodgify{{env}}.com/api/payment/settings",
+							"protocol": "https",
+							"host": [
+								"app",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"payment",
+								"settings"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/subscriptions",
+			"item": [
+				{
+					"name": "/status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code == 200 ) {\t\r",
+									"\r",
+									"    pm.test(\"Verify if correct response body type\", () => {\r",
+									"        pm.response.to.be.json;\r",
+									"    });\r",
+									"    \r",
+									"\tconst schema = {\r",
+									"\t\t\"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"data\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                    \"hasSubscriptions\": {\"type\": \"boolean\"},\r",
+									"                    \"hasPastDueSubscriptions\": {\"type\": \"null\"},\r",
+									"                    \"trialEnabled\": {\"type\": \"boolean\"},\r",
+									"                    \"trialExpiresAt\": {\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"format\": \"date-time\"\r",
+									"                    },\r",
+									"                    \"subscriptionTicket\": {\"type\": \"string\"},\r",
+									"                },\r",
+									"                \"required\": [\"hasSubscriptions\",\"hasPastDueSubscriptions\",\"trialEnabled\",\"trialExpiresAt\",\"subscriptionTicket\"]\r",
+									"            },\r",
+									"            \"success\": {\"type\": \"boolean\"},\r",
+									"            \"warnings\": {\"type\": \"array\"}\r",
+									"        },\r",
+									"        \"required\": [\"data\", \"success\", \"warnings\"]        \r",
+									"    }  \r",
+									"\t\r",
+									"\tpm.test(\"Validate if correct response schema\", ()=> {\r",
+									"\t    pm.response.to.have.jsonSchema(schema);\r",
+									"\t});\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://app.lodgify{{env}}.com/api/subscriptions/status",
+							"protocol": "https",
+							"host": [
+								"app",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"subscriptions",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/v2/status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code == 200 ) {\t\r",
+									"\r",
+									"    pm.test(\"Verify if correct response body type\", () => {\r",
+									"        pm.response.to.be.json;\r",
+									"    });\r",
+									"    \r",
+									"\tconst schema = {\r",
+									"\t\t\"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"data\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                    \"isActive\": {\"type\": \"boolean\"}\r",
+									"                },\r",
+									"                \"required\": [\"isActive\"]\r",
+									"            },\r",
+									"            \"success\": {\"type\": \"boolean\"},\r",
+									"            \"warnings\": {\"type\": \"array\"}\r",
+									"        },\r",
+									"        \"required\": [\"data\", \"success\", \"warnings\"]        \r",
+									"    }  \r",
+									"\t\r",
+									"\tpm.test(\"Validate if correct response schema\", ()=> {\r",
+									"\t    pm.response.to.have.jsonSchema(schema);\r",
+									"\t});\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://app.lodgify{{env}}.com/api/subscriptions/v2/status",
+							"protocol": "https",
+							"host": [
+								"app",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"subscriptions",
+								"v2",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/features",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code == 200 ) {\t\r",
+									"\r",
+									"    pm.test(\"Verify if correct response body type\", () => {\r",
+									"        pm.response.to.be.json;\r",
+									"    });\r",
+									"    \r",
+									"\tconst schema = {\r",
+									"\t\t\"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"data\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                    \"featureStatus\": {\r",
+									"                        \"type\": \"array\",\r",
+									"                        \"items\": {\r",
+									"                            \"type\": \"object\",\r",
+									"                            \"properties\": {\r",
+									"                                \"name\": {\"type\": \"string\"},\r",
+									"                                \"isEnabled\": {\"type\": \"boolean\"},\r",
+									"                                \"upgradeToPlan\": {\r",
+									"                                    \"type\": \"array\",\r",
+									"                                    \"items\": {\"type\": \"string\"}\r",
+									"                                },\r",
+									"                                \"shouldDisplayTag\": {\"type\": \"boolean\"}\r",
+									"                            }\r",
+									"                        }\r",
+									"                    }\r",
+									"                },\r",
+									"                \"required\": [\"featureStatus\"]\r",
+									"            },\r",
+									"            \"success\": {\"type\": \"boolean\"},\r",
+									"            \"warnings\": {\"type\": \"array\"}\r",
+									"        },\r",
+									"        \"required\": [\"data\", \"success\", \"warnings\"]        \r",
+									"    }  \r",
+									"\t\r",
+									"\tpm.test(\"Validate if correct response schema\", ()=> {\r",
+									"\t    pm.response.to.have.jsonSchema(schema);\r",
+									"\t});\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://app.lodgify{{env}}.com/api/subscriptions/features",
+							"protocol": "https",
+							"host": [
+								"app",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"subscriptions",
+								"features"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/last/confirmation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code == 200 ) {\t\r",
+									"\r",
+									"    pm.test(\"Verify if correct response body type\", () => {\r",
+									"        pm.response.to.be.json;\r",
+									"    });\r",
+									"    \r",
+									"\tconst schema = {\r",
+									"\t\t\"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"data\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                    \"hasSubscriptions\": {\"type\": \"boolean\"},\r",
+									"                    \"hasPastDueSubscriptions\": {\"type\": \"null\"},\r",
+									"                    \"trialEnabled\": {\"type\": \"boolean\"},\r",
+									"                    \"trialExpiresAt\": {\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"format\": \"date-time\"\r",
+									"                    },\r",
+									"                    \"subscriptionTicket\": {\"type\": \"string\"},\r",
+									"                },\r",
+									"                \"required\": [\"hasSubscriptions\",\"hasPastDueSubscriptions\",\"trialEnabled\",\"trialExpiresAt\",\"subscriptionTicket\"]\r",
+									"            },\r",
+									"            \"success\": {\"type\": \"boolean\"},\r",
+									"            \"warnings\": {\"type\": \"array\"}\r",
+									"        },\r",
+									"        \"required\": [\"data\", \"success\", \"warnings\"]        \r",
+									"    }  \r",
+									"\t\r",
+									"\tpm.test(\"Validate if correct response schema\", ()=> {\r",
+									"\t    pm.response.to.have.jsonSchema(schema);\r",
+									"\t});\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://app.lodgify{{env}}.com/api/subscriptions/last/confirmation",
+							"protocol": "https",
+							"host": [
+								"app",
+								"lodgify{{env}}",
+								"com"
+							],
+							"path": [
+								"api",
+								"subscriptions",
+								"last",
+								"confirmation"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "propertyId",
+			"value": "369246",
+			"type": "string"
+		},
+		{
+			"key": "customNotificationKey",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "customNotificationTitle",
+			"value": ""
+		},
+		{
+			"key": "rentalName",
+			"value": ""
+		},
+		{
+			"key": "roomTypeId",
+			"value": ""
+		},
+		{
+			"key": "inboxUId",
+			"value": ""
+		},
+		{
+			"key": "transactionId",
+			"value": ""
+		},
+		{
+			"key": "threadUid",
+			"value": ""
+		},
+		{
+			"key": "loginId",
+			"value": "nelson.salazar@lodgify.com",
+			"type": "string"
+		},
+		{
+			"key": "loginPassword",
+			"value": "Hv2eatxrk2m",
+			"type": "string"
+		}
+	]
+}
